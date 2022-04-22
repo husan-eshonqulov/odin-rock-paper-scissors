@@ -4,9 +4,13 @@ const scissors = document.querySelector('.scissors');
 const player = document.querySelector('.player');
 const computer = document.querySelector('.computer');
 
-rock.addEventListener('click', rockHandle);
-paper.addEventListener('click', paperHandle);
-scissors.addEventListener('click', scissorsHandle);
+addEventListeners();
+
+function addEventListeners() {
+    rock.addEventListener('click', rockHandle);
+    paper.addEventListener('click', paperHandle);
+    scissors.addEventListener('click', scissorsHandle);
+}
 
 function removeListeners() {
     rock.removeEventListener('click', rockHandle);
@@ -21,7 +25,10 @@ function rockHandle() {
 
     if (winner === 'player') player.innerText = Number(player.innerText) + 1;
     if (winner === 'computer') computer.innerText = Number(computer.innerText) + 1;
-    if (isOver()) removeListeners();
+    if (isOver()) {
+        removeListeners();
+        showWinner(winner);
+    }
 
     addPairsToGame(playerSelection, computerSelection);
 }
@@ -33,7 +40,10 @@ function paperHandle() {
 
     if (winner === 'player') player.innerText = Number(player.innerText) + 1;
     if (winner === 'computer') computer.innerText = Number(computer.innerText) + 1;
-    if (isOver()) removeListeners();
+    if (isOver()) {
+        removeListeners();
+        showWinner(winner);
+    }
 
     addPairsToGame(playerSelection, computerSelection);
 }
@@ -45,7 +55,10 @@ function scissorsHandle() {
 
     if (winner === 'player') player.innerText = Number(player.innerText) + 1;
     if (winner === 'computer') computer.innerText = Number(computer.innerText) + 1;
-    if (isOver()) removeListeners();
+    if (isOver()) {
+        removeListeners();
+        showWinner(winner);
+    }
 
     addPairsToGame(playerSelection, computerSelection);
 }
@@ -142,4 +155,50 @@ function initPairs() {
     div.append(i0, i1, i2, i3);
 
     return div;
+}
+
+function showWinner(winner) {
+    const span = document.createElement('span');
+    span.classList.add('badge');
+    span.classList.add('me-2');
+    span.classList.add('p-3');
+    span.style.fontSize = '30px';
+
+    const button = document.createElement('button');
+    button.innerText = 'Again';
+    button.classList.add('btn');
+    button.classList.add('btn-lg');
+    button.classList.add('btn-warning');
+    button.style.fontSize = '30px';
+
+    if (winner === 'player') {
+        span.innerText = 'WON';
+        span.classList.add('bg-success');
+    }
+    else {
+        span.innerText = 'LOST';
+        span.classList.add('bg-danger');
+    }
+
+    const again = document.createElement('div');
+    again.classList.add('text-center');
+    again.classList.add('mx-auto');
+    again.classList.add('mt-5');
+    again.classList.add('d-flex');
+    again.classList.add('justify-content-center');
+    again.classList.add('align-items-center');
+    again.style.width = '500px';
+    again.style.height = '200px';
+    again.style.backgroundColor = 'aquamarine';
+    again.append(span, button);
+
+    document.querySelector('.game').prepend(again);
+
+    button.addEventListener('click', () => {
+        document.querySelector('.player').innerText = 0;
+        document.querySelector('.computer').innerText = 0;
+        document.querySelector('.game').innerText = '';
+        again.classList.add('d-none');
+        addEventListeners();
+    });
 }
