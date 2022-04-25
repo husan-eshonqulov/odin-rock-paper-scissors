@@ -189,7 +189,10 @@ function showWinner(winner) {
     again.classList.add('align-items-center');
     again.style.width = '500px';
     again.style.height = '200px';
-    again.style.backgroundColor = 'aquamarine';
+    again.style.backgroundColor = 'rgba(a,a,a,0.4)';
+    again.style.position = 'fixed';
+    again.style.top = '30%';
+    again.style.left = '32%';
     again.append(span, button);
 
     document.querySelector('.game').prepend(again);
