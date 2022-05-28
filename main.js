@@ -181,7 +181,6 @@ function showWinner(winner) {
     }
 
     const again = document.createElement('div');
-    again.classList.add('text-center');
     again.classList.add('mx-auto');
     again.classList.add('mt-5');
     again.classList.add('d-flex');
@@ -189,10 +188,10 @@ function showWinner(winner) {
     again.classList.add('align-items-center');
     again.style.width = '500px';
     again.style.height = '200px';
-    again.style.backgroundColor = 'rgba(a,a,a,0.4)';
+    again.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
     again.style.position = 'fixed';
-    again.style.top = '30%';
-    again.style.left = '32%';
+    again.style.top = '35%';
+    again.style.borderRadius = '10px';
     again.append(span, button);
 
     document.querySelector('.game').prepend(again);
